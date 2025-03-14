@@ -110,8 +110,8 @@ router.post("/otp", async (req, res) => {
         }
 
         // Mark user as verified if not already
-        if (!user.Emailverified) {
-            await userModel.updateOne({ _id: user._id }, { Emailverified: true });
+        if (!user.emailVerified) {
+            await userModel.updateOne({ _id: user._id }, { emailVerified: true });
         }
 
         await OTPModel.deleteMany({ _id: user._id }); // Remove OTP after use

@@ -49,7 +49,7 @@ router.post("/", async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            Emailverified: false,
+            emailVerified: false,
         });
 
         await sendOTP(user._id, user.email);

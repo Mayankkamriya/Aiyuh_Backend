@@ -43,7 +43,7 @@ router.post("/verifyOTP", async (req, res) => {
 
         await userModel.updateOne(
             { _id: userId },
-            { Emailverified: true }
+            { emailVerified: true }
         );
 
         await OTPModel.deleteMany({ _id: userId });
