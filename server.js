@@ -2,6 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import boxRoutes from './presentation/routes/box.routes.js'
+import signin from "./presentation/routes/signin.routes.js";
+import signup from "./presentation/routes/signup..routes.js";
+import otp from "./presentation/routes/otp.routes.js"; 
+import { userMiddleware } from './presentation/middleware/auth.js';
 
 dotenv.config();
 
@@ -20,6 +25,25 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("MongoDB Connected"))
 .catch((err) => console.error("MongoDB Connection Error:", err));
 
+
+app.get("/", (req, res) => {
+  res.send("AIYUH Backend is running!");
+});
+
+// Routes
+app.use("/api/boxes", boxRoutes);
+
+
+// Use Sign-in Routes
+app.use("/api/v1/signin", signin);
+app.use("/api/v1/signup", signup);
+app.use("/api/v1/otp", otp);
+
+app.get("/api/v1/dashboard", userMiddleware, (req, res) => {
+  res.status(200).json({
+      message: "Welcome to the dashboard! You are authenticated."
+  });
+});
 
 // Server Running
 const PORT = process.env.PORT || 5000;
