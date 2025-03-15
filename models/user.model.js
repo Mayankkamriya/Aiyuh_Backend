@@ -1,18 +1,3 @@
-// import mongoose from "mongoose";
-
-// const { Schema, model } = mongoose;
-
-// const UserSchema = new Schema({
-//     name: { type: String },
-//     email: { type: String, unique: true, sparse: true },
-//     password: { type: String,  },
-//     mobile: { type: String, trim: true, sparse: true },
-//     Emailverified: { type: Boolean, default: false },
-// });
-
-// export default model("User", UserSchema);
-
-
 import mongoose from 'mongoose';
 
 const { Schema, model } = mongoose;
@@ -65,53 +50,6 @@ const UserSchema = new Schema({
 
 export default model("User", UserSchema);
 
-
-
-// import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcryptjs';
-// import dotenv from 'dotenv';
-// import User from '../models/user.model.js';
-
-// dotenv.config();
-
-// const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key"; // Keep this safe
-
-// // Generate JWT Token
-// const generateToken = (user) => {
-//     return jwt.sign(
-//         { userId: user._id, loginType: user.loginType },
-//         JWT_SECRET,
-//         { expiresIn: '1h' }
-//     );
-// };
-
-// // Email/Password Login
-// export const loginWithEmail = async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
-
-//         const user = await User.findOne({ email });
-
-//         if (!user) {
-//             return res.status(400).json({ message: "User not found" });
-//         }
-
-//         if (!user.password) {
-//             return res.status(400).json({ message: "This email is linked to Google login. Use Google Sign-In." });
-//         }
-
-//         const isMatch = await bcrypt.compare(password, user.password);
-//         if (!isMatch) {
-//             return res.status(400).json({ message: "Invalid credentials" });
-//         }
-
-//         const token = generateToken(user);
-//         res.status(200).json({ token, user });
-
-//     } catch (error) {
-//         res.status(500).json({ message: "Server error" });
-//     }
-// };
 
 // // Google Login
 // export const loginWithGoogle = async (req, res) => {
