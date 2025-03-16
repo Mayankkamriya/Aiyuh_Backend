@@ -56,7 +56,7 @@ router.post("/password", async (req, res) => {
         });
 
     } catch (e) {
-        res.status(500).json({
+       return res.status(500).json({
             message: "Internal server error",
             error: e.message
         });
