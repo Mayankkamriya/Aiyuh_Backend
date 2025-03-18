@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import boxRoutes from './presentation/routes/box.routes.js'
 import signin from "./presentation/routes/signin.routes.js";
 import signup from "./presentation/routes/signup..routes.js";
+import submitform from "./presentation/routes/submit-form.routes.js";
 import otp from "./presentation/routes/otp.routes.js"; 
 import FormData from './models/form.model.js'
 import { userMiddleware } from './presentation/middleware/auth.js';
@@ -40,6 +41,7 @@ app.use("/api/boxes", boxRoutes);
 app.use("/api/v1/signin", signin);
 app.use("/api/v1/signup", signup);
 app.use("/api/v1/otp", otp);
+app.use("/api/v1/submit-form", submitform);
 
 app.get("/api/v1/dashboard", userMiddleware, (req, res) => {
   res.status(200).json({
@@ -47,24 +49,17 @@ app.get("/api/v1/dashboard", userMiddleware, (req, res) => {
   });
 });
 
-app.post("/api/v1/submit-form", async (req, res) => {
-  try {
-    let formData = req.body;
+// app.post("/api/v1/submit-form",checkUserMiddleware , async (req, res) => {
+//   try {
+//     let formData = req.body;
 
-    let anonymousUserId;
-
-    // Generate a new userId if not provided
-    if (!formData.userId) {
-      anonymousUserId = uuidv4();
-    }
-
-    const newForm = new FormData({ anonymousUserId, ...formData });
-      await newForm.save();
-      res.status(201).json({ message: "Form submitted successfully!" });
-  } catch (error) {
-      res.status(500).json({ message: "Server Error", error });
-  }
-});
+//     const newForm = new FormData({ userId: req.userId, ...formData });
+//       await newForm.save();
+//       res.status(201).json({ message: "Form submitted successfully!" });
+//   } catch (error) {
+//       res.status(500).json({ message: "Server Error", error });
+//   }
+// });
 
 // Server Running
 const PORT = process.env.PORT || 5000;

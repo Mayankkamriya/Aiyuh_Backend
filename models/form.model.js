@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
 const formSchema = new Schema({
-    anonymousUserId: { type: String, required: true },
+    userId: { type: String, required: true },
     name: String,
     day: String,
     month: String,
