@@ -6,7 +6,9 @@ import boxRoutes from './presentation/routes/box.routes.js'
 import signin from "./presentation/routes/signin.routes.js";
 import signup from "./presentation/routes/signup..routes.js";
 import otp from "./presentation/routes/otp.routes.js"; 
+import FormData from './models/form.model.js'
 import { userMiddleware } from './presentation/middleware/auth.js';
+import { v4 as uuidv4 } from 'uuid';
 
 dotenv.config();
 
@@ -43,6 +45,25 @@ app.get("/api/v1/dashboard", userMiddleware, (req, res) => {
   res.status(200).json({
       message: "Welcome to the dashboard! You are authenticated."
   });
+});
+
+app.post("/api/v1/submit-form", async (req, res) => {
+  try {
+    let formData = req.body;
+
+    let anonymousUserId;
+
+    // Generate a new userId if not provided
+    if (!formData.userId) {
+      anonymousUserId = uuidv4();
+    }
+
+    const newForm = new FormData({ anonymousUserId, ...formData });
+      await newForm.save();
+      res.status(201).json({ message: "Form submitted successfully!" });
+  } catch (error) {
+      res.status(500).json({ message: "Server Error", error });
+  }
 });
 
 // Server Running
