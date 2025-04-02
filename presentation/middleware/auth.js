@@ -8,8 +8,7 @@ dotenv.config({ path: path.resolve("..", ".env") });
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const userMiddleware = (req, res, next) => {
-    const header = req.headers.authorization;
-
+    const header = req.headers.authorization?.split(" ")[1];
 
     if (!header) {
         return res.status(403).json({
@@ -18,7 +17,7 @@ export const userMiddleware = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(header, JWT_SECRET);
+        const decoded = jwt.verify(header, JWT_SECRET, { algorithms: ['HS256'] });
         if (decoded) {
             req.userId = decoded.id;
             console.log("Middleware ran");
@@ -47,7 +46,7 @@ export const checkUserMiddleware = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(header, JWT_SECRET);
+        const decoded = jwt.verify(header, JWT_SECRET, { algorithms: ['HS256'] });
         if (decoded) {
             req.userId = decoded.id;  // Assign user ID from token
             return next();

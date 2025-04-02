@@ -44,7 +44,7 @@ router.post("/password", async (req, res) => {
             return jwt.sign(
                 { id: user._id.toString(), loginType: user.loginType },
                 JWT_SECRET,
-                { expiresIn: '7d' }
+                { expiresIn: '7d', algorithm: 'HS256' }
             );
         };
         
