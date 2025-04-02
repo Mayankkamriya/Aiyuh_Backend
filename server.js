@@ -5,31 +5,13 @@ import dotenv from "dotenv";
 import boxRoutes from './presentation/routes/box.routes.js'
 import signin from "./presentation/routes/signin.routes.js";
 import signup from "./presentation/routes/signup..routes.js";
+import updateProfile from "./presentation/routes/updateProfile.route.js";
 import submitform from "./presentation/routes/submit-form.routes.js";
 import otp from "./presentation/routes/otp.routes.js"; 
 import qaRoutes from "./presentation/routes/qaRoutes.js"; 
 import { userMiddleware } from './presentation/middleware/auth.js';
-
-
-// dotenv.config();
-
-// const app = express();
-
-// // Middleware
-// app.use(cors());
-// app.use(express.json({ limit: "10mb" })); // Allow large image uploads
-// app.use(express.urlencoded({ extended: true }));
-
-// // MongoDB Connection
-// mongoose.connect(process.env.MONGODB_URI, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// })
-// .then(() => console.log("MongoDB Connected"))
-// .catch((err) => console.error("MongoDB Connection Error:", err));
-
-
 import { pipeline } from "@xenova/transformers";
+
 
 dotenv.config();
 
@@ -174,6 +156,7 @@ app.use("/api/v1/signup", signup);
 app.use("/api/v1/otp", otp);
 app.use("/api/v1/submit-form", submitform);
 
+app.use("/api/v1/updateProfile",updateProfile)
 app.use("/api/v1/qaRoutes", qaRoutes);
 
 app.get("/api/v1/dashboard", userMiddleware, (req, res) => {

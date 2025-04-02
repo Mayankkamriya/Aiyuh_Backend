@@ -12,6 +12,8 @@ const formSchema = new Schema({
     placeOfBirth: String,
     currentLocation: String,
     gender: String,
+    height: String,
+    weight: String,
     education: String,
     interests: String,
     relationshipStatus: String,
