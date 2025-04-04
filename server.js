@@ -6,6 +6,7 @@ import boxRoutes from './presentation/routes/box.routes.js'
 import signin from "./presentation/routes/signin.routes.js";
 import signup from "./presentation/routes/signup..routes.js";
 import updateProfile from "./presentation/routes/updateProfile.route.js";
+import getProfile from "./presentation/routes/getProfile.route.js";
 import submitform from "./presentation/routes/submit-form.routes.js";
 import otp from "./presentation/routes/otp.routes.js"; 
 import qaRoutes from "./presentation/routes/qaRoutes.js"; 
@@ -156,6 +157,7 @@ app.use("/api/v1/signup", signup);
 app.use("/api/v1/otp", otp);
 app.use("/api/v1/submit-form", submitform);
 
+app.use("/api/v1/getProfile",getProfile)
 app.use("/api/v1/updateProfile",updateProfile)
 app.use("/api/v1/qaRoutes", qaRoutes);
 
